@@ -9,7 +9,7 @@
     "require": {
         "php": ">=5.3.3",
         "pimple/pimple": ">=2.1,<4",
-        "kriswallsmith/assetic": "~1.2"
+        "kriswallsmith/assetic": "~1.1.2"
     },
     "extra": {
         "branch-alias": {
