@@ -35,7 +35,6 @@ class AsseticServiceProvider implements ServiceProviderInterface
          * Default configuration.
          */
         $pimple['assetic.debug'] = false;
-        $pimple['assetic.env'] = 'dev';
         $pimple['assetic.assets'] = array();
         $pimple['assetic.variables'] = array();
 
@@ -142,7 +141,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
                 ->setCode(function (InputInterface $input, OutputInterface $output) use ($c) {
                     $c['assetic.write_to'] = $input->getArgument('write_to') ?: $c['assetic.write_to'];
 
-                    $output->writeln(sprintf('Dumping all <comment>%s</comment> assets.', $c['assetic.env']));
+                    $output->writeln(sprintf('Dumping all assets.'));
 
                     /** @var AssetManager $am */
                     foreach ($c['assetic.asset_manager_names'] as $id) {
@@ -196,10 +195,11 @@ class AsseticServiceProvider implements ServiceProviderInterface
                 ->setCode(function (InputInterface $input, OutputInterface $output) use ($c) {
                     $c['assetic.write_to'] = $input->getArgument('write_to') ?: $c['assetic.write_to'];
 
+                    $output->writeln(sprintf('Dumping all assets.'));
+
                     /** @var LazyAssetManager $am */
                     $am = $c['assetic.lazy_asset_manager'];
 
-                    $output->writeln(sprintf('Dumping all <comment>%s</comment> assets.', $c['assetic.env']));
                     $output->writeln(sprintf('Debug mode is <comment>%s</comment>.', $am->isDebug() ? 'on' : 'off'));
                     $output->writeln('');
 
