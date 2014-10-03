@@ -38,10 +38,15 @@ class AsseticServiceProvider implements ServiceProviderInterface
         $pimple['assetic.ruby.bin'] = '/usr/bin/ruby';
         $pimple['assetic.sass.bin'] = '/usr/bin/sass';
 
-        $pimple['assetic.asset_manager_names'] = array(
-            'assetic.asset_manager',
-            'assetic.lazy_asset_manager',
-        );
+        $pimple['assetic.asset_managers'] = $pimple->factory(function ($c) {
+            $ids = preg_grep("/^[a-z0-9_.]+?\.asset_manager$.$/", $c->keys());
+
+            $app->addCommands(array_map(function ($id) use ($c) {
+                return $c[$id];
+            }, $ids));
+
+            return $app;
+        });
 
         /**
          * Asset Factory configuration happens here
@@ -108,7 +113,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
          * @param Container $c
          * @return \Assetic\Factory\LazyAssetManager
          */
-        $pimple['assetic.lazy_asset_manager'] = function (Container $c) {
+        $pimple['assetic.lazy.asset_manager'] = function (Container $c) {
             $lazy     = new LazyAssetManager($c['assetic.factory']);
 
             foreach ($c['assetic.assets'] as $name => $formula) {
