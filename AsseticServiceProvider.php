@@ -139,7 +139,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
          * @return \Symfony\Component\Console\Command\Command
          */
         $pimple['assetic.dump.command'] = function (Container $c) {
-            return new DumpCommand();
+            return new DumpCommand($c['assetic.asset_manager'], $c['assetic.write_to']);
         };
 
         /**
@@ -147,7 +147,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
          * @return Command
          */
         $pimple['assetic.watch.command'] = function (Container $c) {
-            return new WatchCommand();
+            return new WatchCommand($c['assetic.asset_manager'], $c['assetic.write_to']);
         };
     }
 }
