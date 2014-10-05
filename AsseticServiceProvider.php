@@ -15,6 +15,8 @@ use Symfony\Component\Console\Command\Command;
 
 class AsseticServiceProvider implements ServiceProviderInterface
 {
+    const ASSET_MANAGER_MATCH = '/^[a-z0-9_.]+?\.asset_manager$/';
+
     /**
      * Registers services on the given container.
      *
@@ -44,7 +46,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
          * Finds IDs of all Asset Manager services.
          */
         $pimple['assetic.asset_managers'] = $pimple->factory(function (Container $c) {
-            $ids = preg_grep("/^[a-z0-9_.]+?\.asset_manager$/", $c->keys());
+            $ids = preg_grep(self::ASSET_MANAGER_MATCH, $c->keys());
 
             return $ids;
         });
