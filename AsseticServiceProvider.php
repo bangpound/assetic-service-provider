@@ -38,14 +38,13 @@ class AsseticServiceProvider implements ServiceProviderInterface
         $pimple['assetic.ruby.bin'] = '/usr/bin/ruby';
         $pimple['assetic.sass.bin'] = '/usr/bin/sass';
 
-        $pimple['assetic.asset_managers'] = $pimple->factory(function ($c) {
-            $ids = preg_grep("/^[a-z0-9_.]+?\.asset_manager$.$/", $c->keys());
+        /**
+         * Finds IDs of all Asset Manager services.
+         */
+        $pimple['assetic.asset_managers'] = $pimple->factory(function (Container $c) {
+            $ids = preg_grep("/^[a-z0-9_.]+?\.asset_manager$/", $c->keys());
 
-            $app->addCommands(array_map(function ($id) use ($c) {
-                return $c[$id];
-            }, $ids));
-
-            return $app;
+            return $ids;
         });
 
         /**
