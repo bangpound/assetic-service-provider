@@ -32,6 +32,8 @@ class AsseticServiceProvider implements ServiceProviderInterface
         $pimple['assetic.assets'] = array();
         $pimple['assetic.variables'] = array();
 
+        $pimple['assetic.register_functions'] = true;
+
         $pimple['assetic.java.bin'] = '/usr/bin/java';
         $pimple['assetic.node.bin'] = '/usr/bin/node';
         $pimple['assetic.node.paths'] = array();
@@ -73,7 +75,11 @@ class AsseticServiceProvider implements ServiceProviderInterface
             $factory = new AssetFactory($root, $c['assetic.debug']);
             $factory->setAssetManager($c['assetic.asset_manager']);
             $factory->setFilterManager($c['assetic.filter_manager']);
-            assetic_init($factory);
+
+            // Optionally enable the global asset functions.
+            if ($c['assetic.register_functions']) {
+                assetic_init($factory);
+            }
 
             return $factory;
         };
