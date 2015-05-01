@@ -24,7 +24,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-        /**
+        /*
          * Default configuration.
          */
         $pimple['assetic.debug'] = false;
@@ -39,7 +39,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
         $pimple['assetic.ruby.bin'] = '/usr/bin/ruby';
         $pimple['assetic.sass.bin'] = '/usr/bin/sass';
 
-        /**
+        /*
          * Finds IDs of all Asset Manager services.
          */
         $pimple['assetic.asset_managers'] = $pimple->factory(function (Container $c) {
@@ -48,7 +48,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return $ids;
         });
 
-        /**
+        /*
          * Asset Factory configuration happens here
          *
          * @param Container $c
@@ -63,7 +63,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return $c['assetic.factory'];
         };
 
-        /**
+        /*
          * Factory
          *
          * @param Container $c
@@ -83,7 +83,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return $factory;
         };
 
-        /**
+        /*
          * Asset writer, writes to the 'assetic.write_to' folder
          *
          * @param Container $c
@@ -93,7 +93,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return new AssetWriter($c['assetic.write_to']);
         };
 
-        /**
+        /*
          * Asset manager
          *
          * @return AssetManager
@@ -102,7 +102,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return new AssetManager();
         };
 
-        /**
+        /*
          * Filter manager
          *
          * @return FilterManager
@@ -111,7 +111,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return new FilterManager();
         };
 
-        /**
+        /*
          * Lazy asset manager for loading assets from $pimple['assetic.assets']
          *
          * @param Container $c
