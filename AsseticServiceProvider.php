@@ -130,11 +130,11 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return $lazy;
         };
 
-        /**
+        /*
          * Console commands.
          */
 
-        /**
+        /*
          * Dumps all assets.
          *
          * @param Container $c
@@ -144,7 +144,7 @@ class AsseticServiceProvider implements ServiceProviderInterface
             return new DumpCommand($c['assetic.asset_manager'], $c['assetic.write_to']);
         };
 
-        /**
+        /*
          * @param Container $c
          * @return Command
          */
